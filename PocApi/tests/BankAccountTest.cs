@@ -21,9 +21,9 @@ namespace PocApi.tests
             var PostCreateClient = new RestRequest("customers/");            
             PostCreateClient.AddBody(new
             {
-                user = "loco43",
-                email = "loco43.Perez.joo@gmail.com",
-                first_name = "loco34",
+                user = userName,
+                email = userName + "@gmail.com",
+                first_name = userName,
                 last_name = "Perez Sejas",
                 password = "Control123",
                 address = "Cala Cala 51225",
@@ -33,16 +33,16 @@ namespace PocApi.tests
             var postCreateCustomerResponse = client.Post(PostCreateClient);
             HttpStatusCode statusCode = postCreateCustomerResponse.StatusCode;
             int numericStatusCode = (int)statusCode;
-            Assert.AreEqual(201, numericStatusCode, $"Mensaje en caso de que falle");
+            Assert.AreEqual(201, numericStatusCode, $"The customer was not created, verify the error");
         }
 
         [TestMethod]
         public void VerifyCustomerDeleted()
-        {           
-            var postCreateCustomerResponse = CustomerUtil.CreateCustomer("loco22", "loco22.Perez.joo@gmail.com", "loco22", "Perez Sejas", "Control123", "Cala Cala 51225", "75556789");
-
+        {
             var hostName = new Uri("http://127.0.0.1:8000/");
             var restClient = new RestClient(hostName);
+
+            var postCreateCustomerResponse = CustomerUtil.CreateCustomer("loco22", "loco22.Perez.joo@gmail.com", "loco22", "Perez Sejas", "Control123", "Cala Cala 51225", "75556789");
 
             var deleteCustomerRequest = new RestRequest("customer/31");
             var deleteCustomerResponse = restClient.Delete(deleteCustomerRequest);
