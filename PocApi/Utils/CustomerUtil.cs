@@ -15,14 +15,15 @@ namespace PocApi.Utils
     {
         public static string CreateCustomer(string username, string email, string firstName, string lastName, string password, string address, string phone)
         {
-            var hostName = new Uri("http://127.0.0.1:8000/");
-            var client = new RestClient(hostName);
+            var baseUrl = "http://127.0.0.1:8000/";
+            var options = new RestClientOptions(baseUrl);
+            var client = new RestClient(options);
 
             var createClientRequest = new RestRequest("customers/");
             createClientRequest.AddJsonBody(new
             {
-                user = $"{username}AutoUser-{DateTime.Now.ToString("yyyy-MM-ddTHH:mm:ss")}",
-                email = email,
+                user = $"{username}{DateTime.Now:MM-dd-yyyy-hh-mm-ss}",
+                email = $"{email}.joo@gmail.com",
                 first_name = firstName,
                 last_name = lastName,
                 password = password,
@@ -32,7 +33,7 @@ namespace PocApi.Utils
 
             var postCreateCustomerResponse = client.Post(createClientRequest);
 
-            if (postCreateCustomerResponse.StatusCode == HttpStatusCode.Created)
+            if (postCreateCustomerResponse.IsSuccessful)
             {
                 var createdCustomer = postCreateCustomerResponse.Content;
                 return createdCustomer;
@@ -68,6 +69,5 @@ namespace PocApi.Utils
                 throw new Exception("Failed to create customer. Status code: " + (int)postCreateAccountResponse.StatusCode);
             }
         }
-
     }
 }

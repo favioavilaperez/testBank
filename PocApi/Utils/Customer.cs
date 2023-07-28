@@ -8,8 +8,10 @@ namespace PocApi.Utils
 {
     internal class Customer
     {
-
-
-
+        public object customer_id { get; internal set; }
+        public string Nombre { get; set; }
+        public string Apellido { get; set; }
+        public string Email { get; set; }
+        public string Telefono { get; set; }
     }
 }
