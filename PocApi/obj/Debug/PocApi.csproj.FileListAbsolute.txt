@@ -50,12 +50,6 @@ D:\Mis Documentos\Mi Escritorio\django practice\PocApi\PocApi\obj\Debug\PocApi.c
 D:\Mis Documentos\Mi Escritorio\django practice\PocApi\PocApi\obj\Debug\PocApi.csproj.CopyComplete
 D:\Mis Documentos\Mi Escritorio\django practice\PocApi\PocApi\obj\Debug\PocApi.exe
 D:\Mis Documentos\Mi Escritorio\django practice\PocApi\PocApi\obj\Debug\PocApi.pdb
-F:\automationBank\testBank\PocApi\bin\Debug\es\Microsoft.VisualStudio.TestPlatform.TestFramework.resources.dll
-F:\automationBank\testBank\PocApi\bin\Debug\es\Microsoft.TestPlatform.AdapterUtilities.resources.dll
-F:\automationBank\testBank\PocApi\bin\Debug\es\Microsoft.TestPlatform.CoreUtilities.resources.dll
-F:\automationBank\testBank\PocApi\bin\Debug\es\Microsoft.VisualStudio.TestPlatform.MSTest.TestAdapter.resources.dll
-F:\automationBank\testBank\PocApi\bin\Debug\es\Microsoft.VisualStudio.TestPlatform.MSTestAdapter.PlatformServices.resources.dll
-F:\automationBank\testBank\PocApi\bin\Debug\es\Microsoft.VisualStudio.TestPlatform.ObjectModel.resources.dll
 F:\automationBank\testBank\PocApi\bin\Debug\Microsoft.VisualStudio.TestPlatform.MSTest.TestAdapter.dll
 F:\automationBank\testBank\PocApi\bin\Debug\Microsoft.VisualStudio.TestPlatform.MSTestAdapter.PlatformServices.dll
 F:\automationBank\testBank\PocApi\bin\Debug\Microsoft.TestPlatform.AdapterUtilities.dll
@@ -91,6 +85,7 @@ F:\automationBank\testBank\PocApi\bin\Debug\System.Threading.Tasks.Extensions.xm
 F:\automationBank\testBank\PocApi\bin\Debug\System.ValueTuple.xml
 F:\automationBank\testBank\PocApi\bin\Debug\cs\Microsoft.VisualStudio.TestPlatform.TestFramework.resources.dll
 F:\automationBank\testBank\PocApi\bin\Debug\de\Microsoft.VisualStudio.TestPlatform.TestFramework.resources.dll
+F:\automationBank\testBank\PocApi\bin\Debug\es\Microsoft.VisualStudio.TestPlatform.TestFramework.resources.dll
 F:\automationBank\testBank\PocApi\bin\Debug\fr\Microsoft.VisualStudio.TestPlatform.TestFramework.resources.dll
 F:\automationBank\testBank\PocApi\bin\Debug\it\Microsoft.VisualStudio.TestPlatform.TestFramework.resources.dll
 F:\automationBank\testBank\PocApi\bin\Debug\ja\Microsoft.VisualStudio.TestPlatform.TestFramework.resources.dll

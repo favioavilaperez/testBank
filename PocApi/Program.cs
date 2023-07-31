@@ -38,7 +38,7 @@ namespace PocApi
 
             //Delete Costumer
 
-            var deleteCustomerForClient = new RestRequest("customer/21");
+            var deleteCustomerForClient = new RestRequest("customer/21"); 
 
             var deleteCustomerResponse = client.Delete(deleteCustomerForClient);
 

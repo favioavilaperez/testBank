@@ -1,36 +1,35 @@
 ﻿using System;
+using System.IO;
 using System.Net;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Newtonsoft.Json;
 using PocApi.Utils;
 using RestSharp;
 
 namespace PocApi.tests
 {
     [TestClass]
-    public class BankAccountTest
+    public class BankAccountTest : RandomGenerator
     {
         [TestMethod]
         public void VerifyCustomerCreation()
         {
-            var hostName = "http://127.0.0.1:8000/";
+            var hostName = new Uri("http://127.0.0.1:8000/");
+            var restClient = new RestClient(hostName);
 
-            var userName = "AutoUser-" + DateTime.Now.ToString("MM-dd-yyyy-hh-mm-ss");
-            var options = new RestClientOptions(hostName);
-            var client = new RestClient(options);
-
-            var PostCreateClient = new RestRequest("customers/");            
-            PostCreateClient.AddBody(new
+            var createClientRequest = new RestRequest("customers/");
+            createClientRequest.AddJsonBody(new
             {
-                user = userName,
-                email = userName + "@gmail.com",
-                first_name = userName,
-                last_name = "Perez Sejas",
-                password = "Control123",
-                address = "Cala Cala 51225",
-                phone = "75556789",
+                user = GenerateUserName(),
+                email = GenerateEmail(),
+                first_name = GenerateFirstName(),
+                last_name = GenerateLastName(),
+                password = "Control123$",
+                address = GenerateAddress(),
+                phone = GeneratePhone(),
             });
 
-            var postCreateCustomerResponse = client.Post(PostCreateClient);
+            var postCreateCustomerResponse = restClient.Post(createClientRequest);
             HttpStatusCode statusCode = postCreateCustomerResponse.StatusCode;
             int numericStatusCode = (int)statusCode;
             Assert.AreEqual(201, numericStatusCode, $"The customer was not created, verify the error");
@@ -39,12 +38,15 @@ namespace PocApi.tests
         [TestMethod]
         public void VerifyCustomerDeleted()
         {
+            getCustomerId.CreateCustomer("Amanda4", "Amanda4@gmail.com", "Amanda4", "Perez4", "Control123", "CBBA 235", "76508899");
+            var customer = getCustomerId.GetCustomerId(getId);
+            Console.WriteLine(customer);
+
             var hostName = new Uri("http://127.0.0.1:8000/");
             var restClient = new RestClient(hostName);
+            
 
-            var postCreateCustomerResponse = CustomerUtil.CreateCustomer("loco22", "loco22.Perez.joo@gmail.com", "loco22", "Perez Sejas", "Control123", "Cala Cala 51225", "75556789");
-
-            var deleteCustomerRequest = new RestRequest("customer/31");
+            var deleteCustomerRequest = new RestRequest("customer/");
             var deleteCustomerResponse = restClient.Delete(deleteCustomerRequest);
 
             HttpStatusCode statusCode = deleteCustomerResponse.StatusCode;
@@ -55,20 +57,19 @@ namespace PocApi.tests
         [TestMethod]
         public void VerifyAcountCreation()
         {
-            var hostName = "http://127.0.0.1:8000/";
+            var hostName = new Uri("http://127.0.0.1:8000/");
+            var restClient = new RestClient(hostName);
 
-            var options = new RestClientOptions(hostName);
-            var client = new RestClient(options);
+            var customerId = 41;
 
-            var PostCreateAccount = new RestRequest("accounts/");
-            PostCreateAccount.AddBody(new
+            var createAccountRequest = new RestRequest("accounts/");
+            createAccountRequest.AddJsonBody(new
             {
-                customer_id = "19",
-                account_number = "951-678-4651",
-                balance = "100",
+                customer_id = customerId,
+                account_number = "112121",
             });
 
-            var postCreateAccountResponse = client.Post(PostCreateAccount);
+            var postCreateAccountResponse = restClient.Post(createAccountRequest);
             HttpStatusCode statusCode = postCreateAccountResponse.StatusCode;
             int numericStatusCode = (int)statusCode;
             Assert.AreEqual(201, numericStatusCode, $"Mensaje en caso de que falle");
@@ -89,5 +90,7 @@ namespace PocApi.tests
             int numericStatusCode = (int)statusCode;
             Assert.AreEqual(200, numericStatusCode, $"El código de estado no coincide con el esperado");
         }
+
+
     }
 }

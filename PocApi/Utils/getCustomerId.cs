@@ -8,10 +8,13 @@ using System.Net;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web.UI.WebControls;
+using System.Web;
+using System.IO;
 
 namespace PocApi.Utils
 {
-    public class CustomerUtil
+    public class getCustomerId
     {
         public static string CreateCustomer(string username, string email, string firstName, string lastName, string password, string address, string phone)
         {
@@ -43,7 +46,7 @@ namespace PocApi.Utils
             }
         }
 
-        public static string CreateAccount(string costumerId, string accountNumber, string balance) 
+        public static string CreateAccount(string costumerId, string accountNumber, string balance)
         {
             var hostName = new Uri("http://127.0.0.1:8000/");
             var client = new RestClient(hostName);
@@ -69,5 +72,38 @@ namespace PocApi.Utils
             }
         }
 
+        public static string GetCustomerId(string getId)
+        {
+            var hostName = new Uri("http://127.0.0.1:8000/");
+            var client = new RestClient(hostName);
+
+            var getListCustomers = new RestRequest("customers/");
+            var getCustomerListResponse = client.Get(getListCustomers);
+            getId = getCustomerListResponse.GetType().GetProperty("customer_id");
+            return getId;
+            //obtener el costumer id de la lista
+
+
+        }
+    }
+
+    public static string DeleteCustomerId(string customerId)
+    {
+        var hostName = new Uri("http://127.0.0.1:8000/");
+        var client = new RestClient(hostName);
+
+        var deleteCustomerIdResponse = new RestRequest("customers/" + customerId);
+
+        var deleteCustomerResponse = client.Delete(deleteCustomerId);
+        Console.WriteLine(deleteCustomerId);
+        if (deleteCustomerId = HttpStatusCode.OK)
+        {
+            var customerDelete = deleteCustomerResponse.Content;
+            return customerDelete;
+        }
+        else
+        {
+            throw new Exception("The customer can't be deleted" + (int)deleteCustomerResponse.StatusCode);
+        }
     }
 }
