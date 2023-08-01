@@ -39,16 +39,11 @@ namespace PocApi.tests
         public void VerifyCustomerDeleted()
         {
             CustomerUtil.CreateCustomer();
-            var getId = CustomerUtil.GetCustomerId();
-
-            var hostName = new Uri("http://127.0.0.1:8000/");
-            var restClient = new RestClient(hostName);
-            var deleteCustomerRequest = new RestRequest("customer/" + getId);
-            var deleteCustomerResponse = restClient.Delete(deleteCustomerRequest);
-
-            HttpStatusCode statusCode = deleteCustomerResponse.StatusCode;
-            int numericStatusCode = (int)statusCode;
-            Assert.AreEqual(200, numericStatusCode, $"Status code does not match expected");
+            var getIdToken = CustomerUtil.GetCustomerId();
+            string getId = getIdToken.ToString();
+            var statusCodeDelete = CustomerUtil.DeleteCustomer(getId);
+            var statusCode = Convert.ToInt32(statusCodeDelete);
+            Assert.AreEqual(200, statusCode, $"Status code does not match expected");
         }
 
         [TestMethod]
@@ -75,7 +70,7 @@ namespace PocApi.tests
         [TestMethod]
         public void VerifyAcountDeleted()
         {
-            var postCreateAccountResponse = CustomerUtil.CreateAccount("19", "951-678-4651", "100");
+            var postCreateAccountResponse = CustomerUtil.CreateAccount("19", "951-678-4651");
 
             var hostName = new Uri("http://127.0.0.1:8000/");
             var restClient = new RestClient(hostName);

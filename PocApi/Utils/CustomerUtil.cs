@@ -74,13 +74,25 @@ namespace PocApi.Utils
             var hostName = new Uri("http://127.0.0.1:8000/");
             var client = new RestClient(hostName);
 
-            var getCustomers = new RestRequest("customers/");
-            var getCustomerList = client.Get(getCustomers);
-            string customerContentList = getCustomerList.Content;
+            var customers = new RestRequest("customers/");
+            var CustomerList = client.Get(customers);
+            string customerContentList = CustomerList.Content;
             JToken responseJson = JToken.Parse(customerContentList);
             JToken getLastCustomer = responseJson.Last;
             string customerId = getLastCustomer["customer_id"].ToString();
             return customerId;
+        }
+
+        public static string DeleteCustomer(string customerId) 
+        {
+            var hostName = new Uri("http://127.0.0.1:8000/");
+            var client = new RestClient(hostName);
+
+            var customers = new RestRequest("customer/" + customerId);
+            var deleteCustomer = client.Delete(customers);
+            HttpStatusCode statusCode = deleteCustomer.StatusCode;
+            int numericStatusCode = (int)statusCode;
+            return numericStatusCode.ToString();
         }
     }
 }
