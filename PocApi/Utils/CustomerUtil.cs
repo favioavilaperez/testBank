@@ -44,7 +44,7 @@ namespace PocApi.Utils
             }
         }
 
-        public static string CreateAccount(string costumerId, string accountNumber, string balance)
+        public static string CreateAccount(string costumerId, string accountNumber)
         {
             var hostName = new Uri("http://127.0.0.1:8000/");
             var client = new RestClient(hostName);
@@ -53,8 +53,7 @@ namespace PocApi.Utils
             PostCreateAccount.AddBody(new
             {
                 customer_id = costumerId,
-                account_number = accountNumber,
-                balance = balance,
+                account_number = accountNumber
             });
 
             var postCreateAccountResponse = client.Post(PostCreateAccount);
@@ -75,12 +74,13 @@ namespace PocApi.Utils
             var hostName = new Uri("http://127.0.0.1:8000/");
             var client = new RestClient(hostName);
 
-            var getListCustomers = new RestRequest("customers/");
-            var getCustomerListResponse = client.Get(getListCustomers);
-            var dataResponse = JToken.Parse(JsonConvert.SerializeObject(getCustomerListResponse));
-            var customerId = dataResponse["customer_id"];
+            var getCustomers = new RestRequest("customers/");
+            var getCustomerList = client.Get(getCustomers);
+            string customerContentList = getCustomerList.Content;
+            JToken responseJson = JToken.Parse(customerContentList);
+            JToken getLastCustomer = responseJson.Last;
+            string customerId = getLastCustomer["customer_id"].ToString();
             return customerId;
         }
-
     }
 }

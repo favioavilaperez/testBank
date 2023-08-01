@@ -8,12 +8,12 @@ namespace PocApi.Utils
 {
     public class RandomGenerator
     {
-        private static readonly string[] userNames = { "Juan01", "Carol27", "Sebas99", "Leonardo17" };
-        private static readonly string[] emails = { "testemail01@gmail.com", "testemail02@gmail.com", "testemail03@gmail.com", "testemail04@gmail.com" };
-        private static readonly string[] firstNames = { "John", "Paul", "Vanessa", "Jorge" };
+        private static readonly string[] userNames = { "Jhojan", "Mardey", "Sergio", "Daniel" };
+        private static readonly string[] emails = { "testemail3@gmail.com", "testemail554@gmail.com", "testemail65@gmail.com", "testemail855@gmail.com" };
+        private static readonly string[] firstNames = { "John61", "Pau78", "Vanesa93", "Jorg44" };
         private static readonly string[] lastNames = { "Burgos", "Perez", "Rojas", "Ramirez" };
         private static readonly string[] addresses = { "Cala Cala 51225", "Casto Rojas 1235", "Beijing 264" };
-        private static readonly string[] phones = { "793254788", "60926874", "78745123" };
+        private static readonly string[] phones = { "79325478", "6926874", "7874513" };
 
         public static string GenerateUserName()
         {
@@ -73,6 +73,4 @@ namespace PocApi.Utils
             return rnd;
         }
     }
-
-
 }
