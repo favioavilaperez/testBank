@@ -1,8 +1,6 @@
 ﻿using System;
-using System.IO;
 using System.Net;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Newtonsoft.Json;
 using PocApi.Utils;
 using RestSharp;
 
@@ -14,25 +12,10 @@ namespace PocApi.tests
         [TestMethod]
         public void VerifyCustomerCreation()
         {
-            var hostName = new Uri("http://127.0.0.1:8000/");
-            var restClient = new RestClient(hostName);
-
-            var createClientRequest = new RestRequest("customers/");
-            createClientRequest.AddJsonBody(new
-            {
-                user = GenerateUserName(),
-                email = GenerateEmail(),
-                first_name = GenerateFirstName(),
-                last_name = GenerateLastName(),
-                password = "Control123$",
-                address = GenerateAddress(),
-                phone = GeneratePhone(),
-            });
-
-            var postCreateCustomerResponse = restClient.Post(createClientRequest);
-            HttpStatusCode statusCode = postCreateCustomerResponse.StatusCode;
-            int numericStatusCode = (int)statusCode;
-            Assert.AreEqual(201, numericStatusCode, $"The customer was not created, verify the error");
+            CustomerUtil.createCustomersAndGetStatusCode();
+            var statusCode = CustomerUtil.createCustomersAndGetStatusCode();            
+            var statusCodeCustomer = Convert.ToInt32(statusCode);
+            Assert.AreEqual(201, statusCodeCustomer, $"The customer was not created, verify the error");
         }
 
         [TestMethod]

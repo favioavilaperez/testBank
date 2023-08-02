@@ -1,14 +1,7 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
+﻿using Newtonsoft.Json.Linq;
 using RestSharp;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Net;
-using System.Net.Http;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace PocApi.Utils
 {
@@ -91,6 +84,29 @@ namespace PocApi.Utils
             var customers = new RestRequest("customer/" + customerId);
             var deleteCustomer = client.Delete(customers);
             HttpStatusCode statusCode = deleteCustomer.StatusCode;
+            int numericStatusCode = (int)statusCode;
+            return numericStatusCode.ToString();
+        }
+
+        public static string createCustomersAndGetStatusCode()
+        {
+            var hostName = new Uri("http://127.0.0.1:8000/");
+            var client = new RestClient(hostName);
+
+            var createClientRequest = new RestRequest("customers/");
+            createClientRequest.AddJsonBody(new
+            {
+                user = GenerateUserName(),
+                email = GenerateEmail(),
+                first_name = GenerateFirstName(),
+                last_name = GenerateLastName(),
+                password = "Control123$",
+                address = GenerateAddress(),
+                phone = GeneratePhone(),
+            });
+
+            var postCreateCustomerResponse = client.Post(createClientRequest);
+            HttpStatusCode statusCode = postCreateCustomerResponse.StatusCode;   
             int numericStatusCode = (int)statusCode;
             return numericStatusCode.ToString();
         }
