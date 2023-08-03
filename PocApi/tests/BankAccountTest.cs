@@ -7,13 +7,13 @@ using RestSharp;
 namespace PocApi.tests
 {
     [TestClass]
-    public class BankAccountTest : RandomGenerator
+    public class BankAccountTest : RandomGeneratorCustomer
     {
         [TestMethod]
         public void VerifyCustomerCreation()
         {
-            CustomerUtil.createCustomersAndGetStatusCode();
-            var statusCode = CustomerUtil.createCustomersAndGetStatusCode();            
+            CustomerUtil.CreateCustomersAndGetStatusCode();
+            var statusCode = CustomerUtil.CreateCustomersAndGetStatusCode();
             var statusCodeCustomer = Convert.ToInt32(statusCode);
             Assert.AreEqual(201, statusCodeCustomer, $"The customer was not created, verify the error");
         }
@@ -32,22 +32,13 @@ namespace PocApi.tests
         [TestMethod]
         public void VerifyAcountCreation()
         {
-            var hostName = new Uri("http://127.0.0.1:8000/");
-            var restClient = new RestClient(hostName);
-
-            var customerId = 41;
-
-            var createAccountRequest = new RestRequest("accounts/");
-            createAccountRequest.AddJsonBody(new
-            {
-                customer_id = customerId,
-                account_number = "112121",
-            });
-
-            var postCreateAccountResponse = restClient.Post(createAccountRequest);
-            HttpStatusCode statusCode = postCreateAccountResponse.StatusCode;
-            int numericStatusCode = (int)statusCode;
-            Assert.AreEqual(201, numericStatusCode, $"The account was not created, verify the error");
+            CustomerUtil.CreateCustomersAndGetStatusCode();
+            var getIdToken = CustomerUtil.GetCustomerId();
+            var getId = Convert.ToInt32(getIdToken);
+            AccountUtil.CreateAccountAndGetStatusCode(getId);
+            var statusCode = CustomerUtil.CreateCustomersAndGetStatusCode();
+            var statusCodeCustomer = Convert.ToInt32(statusCode);
+            Assert.AreEqual(201, statusCodeCustomer, $"The account was not created, verify the error");
         }
 
         [TestMethod]

@@ -1,17 +1,13 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace PocApi.Utils
 {
-    public class RandomGenerator
+    public class RandomGeneratorCustomer
     {
-        private static readonly string[] userNames = { "Alan", "Alicia", "Jesus", "Andrea" };
-        private static readonly string[] emails = { "Alan@gmail.com", "Alicia@gmail.com", "Jesus@gmail.com", "Andrea@gmail.com" };
-        private static readonly string[] firstNames = { "TCs1", "TCs2", "TCs3", "TCs4" };
-        private static readonly string[] lastNames = { "Burgos", "Perez", "Rojas", "Ramirez" };
+        private static readonly string[] userNames = { "Bartolome8", "Belen8", "Julian8", "Juliana8" };
+        private static readonly string[] emails = { "Bartolome8@gmail.com", "Belen8@gmail.com", "Juliano8@gmail.com", "Juliana8@gmail.com" };
+        private static readonly string[] firstNames = { "Bartolome8", "Belen8", "Julian8", "Juliana8" };
+        private static readonly string[] lastNames = { "Burgos", "Perez", "Avila", "Ramirez" };
         private static readonly string[] addresses = { "Cala Cala 51225", "Casto Rojas 1235", "Beijing 264" };
         private static readonly string[] phones = { "79325478", "6926874", "7874513" };
 
@@ -61,16 +57,6 @@ namespace PocApi.Utils
             string phone = phones[random.Next(0, phones.Length)];
 
             return $"{phone}";
-        }
-
-        public static Random GetAccountNumber()
-        {
-            Random rnd = new Random();
-            for (int j = 0; j < 1; j++)
-            {
-                Console.WriteLine(rnd.Next());
-            }
-            return rnd;
         }
     }
 }

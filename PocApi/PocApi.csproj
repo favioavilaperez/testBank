@@ -95,9 +95,11 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="tests\BankAccountTest.cs" />
+    <Compile Include="Utils\AccountUtil.cs" />
     <Compile Include="Utils\Customer.cs" />
     <Compile Include="Utils\CustomerUtil.cs" />
-    <Compile Include="Utils\RandomGenerator.cs" />
+    <Compile Include="Utils\RandomGeneratorAccounts.cs" />
+    <Compile Include="Utils\RandomGeneratorCustomer.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

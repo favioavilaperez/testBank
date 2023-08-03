@@ -5,7 +5,7 @@ using System.Net;
 
 namespace PocApi.Utils
 {
-    public class CustomerUtil : RandomGenerator
+    public class CustomerUtil : RandomGeneratorCustomer
     {
         public static string CreateCustomer()
         {
@@ -88,7 +88,7 @@ namespace PocApi.Utils
             return numericStatusCode.ToString();
         }
 
-        public static string createCustomersAndGetStatusCode()
+        public static string CreateCustomersAndGetStatusCode()
         {
             var hostName = new Uri("http://127.0.0.1:8000/");
             var client = new RestClient(hostName);
